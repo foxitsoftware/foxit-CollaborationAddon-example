@@ -1,0 +1,57 @@
+@import '~antd/dist/antd.less';
+@primary-color: #923094;
+@border-radius-base: 4px;
+@font-size-base: 14px;
+body ,html{
+  height: calc(var(--vh, 1vh) * 100) !important;
+}
+html{
+  overflow: hidden;
+}
+
+#root{
+  height: calc(var(--vh, 1vh) * 100);
+  font-family: 'Arial';
+  font-size: 14px;
+}
+
+#pdf-ui {
+  width:100%;
+  height: calc(var(--vh, 1vh) * 95);
+  overflow-y: auto;
+}
+
+.fv__ui-mobile #pdf-ui {
+  top: 0;
+}
+
+.fv__ui-mobile .fv__ui-nav {
+  display: none;
+}
+.fv__ui-toolbar .fv__ui-tab-nav{
+  height:30px;
+}
+.fv__ui-sidebar-comments-filter-fixed{
+  top:-5rem !important;
+}
+.ant-modal-body{
+  padding:16px!important;
+}
+select.file-list {
+    max-width: 150px;
+}
+.mb-10{
+  margin-bottom:10px;
+}
+.ant-spin-nested-loading > div > .ant-spin{
+  top:100px;
+  z-index: 9999!important;
+}
+.ant-message{
+  z-index:20001!important;
+}
+.collab-modal-wrap{
+  padding:4px;
+  position: relative;
+}
+

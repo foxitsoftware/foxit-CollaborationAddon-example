@@ -1,0 +1,7 @@
+Foxit PDF Collaboration SDK V1.3.0 -- Migration Notices
+Release Date: November 14, 2023
+
+1. The `userId` and `memberId` type have been changed from `number` to `string` in all Collaboration Client APIs, including `Collaboration.addMembers()`, `Collaboration.removeMembers()`, `Collaboration.updateMemberPermission()`, `UserInfo.id` and `Member.id`.
+If these APIs are used in your application, please update the type from `number` to `string`.
+
+2. The database schema of Collaboration Server needs to be updated. All user id columns in the database have been changed from `int` to `varchar`. Your can refer to the Prisma schema file in `@foxitsoftware/collab-db/prisma/schema.prisma`, and generate a new migration by running `npx prisma migrate dev --name <migration-name>`. For details, please refer to [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate).

@@ -1,0 +1,28 @@
+Foxit PDF Collaboration SDK  V1.3.0 2023-11-14
+
+* Updated the user ID type: Changed the user id type from integer to string in APIs "addMembers", "userProvider", "removeMembers" and "updateMemberPermission".
+* Improved user access check process:This improvement is to implement a token-based authentication when establishing a WebSocket connection with our Collbaration server to enhance security and access control.
+
+========================================================================================
+Foxit PDF Collaboration SDK  V1.2.0 2023-08-29
+
+* Added new APIs WebCollabClient::Collaboration#setMousePointerSyncRate and WebCollabClient::ScreenSync#setSyncRate to set the time interval for sending mouse pointer position and screen sync data to the server.
+* Introduced new class WebCollabClient::LoggerFactory to log features for debugging and error tracking.
+* Added WebCollabServer::LoggerOptions to enable logs based on log levels.
+* New events network-connection-up and network-connection-down added to notify users of connection issues.
+  Relevant API:
+  WebCollabClient:Collaboration.on()
+
+==============================================================================================
+Foxit PDF Collaboration SDK  V1.1.0 2023-03-07
+
+* Initial Release.
+
+In this release, the key features are included:
+
+*	Live Collaboration showcase:https://webviewer-examples.foxit.com/#/collaboration
+*	Real-time annotation for enhancing PDF collaboration and engagement.
+*	Screen synchronization, including mouse pointer and scrolling.
+*	Synchronization of Offline annotation data.
+*	Customize of annotation permissions.
+*	Clustering based-on Redis implementation in services of messaging and caching.

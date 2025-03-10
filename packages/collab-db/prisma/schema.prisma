@@ -1,0 +1,92 @@
+datasource db {
+  provider = "postgresql" // change to "mysql" if you want to use mysql
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Annotation {
+  id            Int      @id @default(autoincrement())
+  xfdf          String?
+  annotContents String?  @map("annot_contents")
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      String   @map("author_id") @db.VarChar(128)
+  pageNumber    Int      @map("page_number")
+  document      Document @relation(fields: [documentId], references: [id])
+  documentId    String   @map("document_id") @db.VarChar(32)
+  annotationId  String   @map("annotation_id") @db.VarChar(36)
+  inReplyTo     String?  @map("in_reply_to") @db.VarChar(36)
+  createdAt     BigInt?  @map("created_at")
+  updatedAt     BigInt?  @map("updated_at")
+
+  @@map("t_annotation")
+}
+
+model Document {
+  id          String           @id @db.VarChar(32)
+  author      User             @relation(fields: [authorId], references: [id])
+  authorId    String           @map("author_id") @db.VarChar(128)
+  isPublic    Boolean?         @map("is_public")
+  name        String?          @db.VarChar(256)
+  fileURL     String?          @map("file_url") @db.VarChar(2048)
+  permission  Int?             @default(-1)
+  status      Int?             @default(1)
+  createdAt   BigInt?          @map("created_at")
+  updatedAt   BigInt?          @map("updated_at")
+  annotations Annotation[]
+  members     DocumentMember[]
+
+  @@map("t_documents")
+}
+
+model DocumentMember {
+  id         Int      @id @default(autoincrement())
+  lastReadAt BigInt?  @map("last_read")
+  email      String?  @db.VarChar(128)
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String   @map("user_id") @db.VarChar(128)
+  document   Document @relation(fields: [documentId], references: [id])
+  documentId String   @map("document_id") @db.VarChar(32)
+  permission Int      @default(-1)
+  createdAt  BigInt?  @map("created_at")
+  updatedAt  BigInt?  @map("updated_at")
+
+  @@map("t_documents_members")
+}
+
+model User {
+  id              String           @id @default(uuid()) @db.VarChar(128)
+  name            String?          @map("user_name") @db.VarChar(128)
+  email           String?          @unique(map: "t_users_email_key") @db.VarChar(128)
+  password        String?          @db.VarChar(64)
+  status          String?          @db.VarChar(20)
+  type            String?          @db.VarChar(20)
+  customData      String?          @map("custom_data")
+  createdAt       BigInt?          @map("created_at")
+  updatedAt       BigInt?          @map("updated_at")
+  documents       Document[]
+  annotations     Annotation[]
+  documentMembers DocumentMember[]
+
+  @@map("t_user")
+}
+
+model Invitation {
+  id          String  @id @db.VarChar(32)
+  documentId  String  @map("document_id") @db.VarChar(32)
+  status      Int?    @default(1)
+  expiresAt  BigInt?  @map("expired_at")
+  createdAt  BigInt?  @map("created_at")
+  updatedAt  BigInt?  @map("updated_at")
+
+  @@map("t_invitation")
+}
+
+model YLog {
+  id          Int      @id @default(autoincrement())
+  documentId  String   @map("document_id") @db.VarChar(32)
+  update       Bytes
+  @@map("t_ylog")
+}
