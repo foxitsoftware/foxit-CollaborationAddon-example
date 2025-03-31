@@ -1,93 +1,128 @@
-## Project structures
+## Project Structure
 
 ```
-packages
-  web-collab-client   -- collab client sdk
-  web-collab-server   -- collab server sdk
-  collab-db           -- collab db setup and migration
-docs                  -- documents 
-samples
-  collabClientReactSample/ -- collab client demo based on React Framework
-  collabClientVueSample/ -- collab client demo based on Vue3 Framework
-  collabServerSample/ -- collab server demo
+packages/
+  web-collab-client/   - Collaboration client SDK
+  web-collab-server/   - Collaboration server SDK
+  collab-db/           - Database setup and migration scripts
+docs/                  - Documentation files
+samples/
+  collabClientReactSample/ - React-based client demo
+  collabClientVueSample/   - Vue3-based client demo
+  collabServerSample/      - Server demo
 ```
 
-## Development environment setup  
+## Development Environment Setup  
 
-### Setup Nodejs
+### Prerequisites
 
-1. install Nodejs, preferred version: nodejs 20 and 22+ lts.
+1. **Install Node.js**  
+   Preferred versions: Node.js 20 or 22+ LTS.  
+   Verify installation:  
 
-``` sh
-node -v 
-# v20.10.0
+   ```sh
+   node -v 
+   # Example output: v20.10.0
+   ```
+
+2. **Install Docker**  
+   Follow the [Docker installation guide](https://www.docker.com/get-started).
+
+---
+
+## Getting Started
+
+### Install Dependencies
+
+Navigate to the project root and run:  
+
+```sh
+npm install
 ```
 
-### install Docker
+### Notices
 
-[Reference](https://www.docker.com/get-started/)
+- **Dependency Management**:  
+  This project uses npm workspaces to manage dependencies across samples and packages. If you prefer using other package managers like `yarn` or `pnpm`, update the workspace settings accordingly.
 
-## Getting started
+- **Database and Redis Setup**:  
+  - Ensure Docker or Podman is installed and running.  
+  - The default database system is PostgreSQL, running on port `5432`.  
+  - Redis will run on port `6379` by default.
 
-### install dependencies
+---
 
-cd into to project root and run command: `npm install`
+### Setup Local Database and Redis
 
-**Notice**:
-Npm workspace is used to manage dependencies between samples and packages.
-If you want to use other package manager, like `yarn` or `pnpm`, please change the workspace settings.
+#### Using Docker/Podman
 
-### Setup Local Database and Redis for development
+1. **Install and Configure Database**  
+   Run the following command to set up a PostgreSQL database (default port: 5432):  
 
-**Notice**:
+   ```sh
+   npm run collab-cli setup-local-db
+   ```
 
-- Make sure Docker or Podman is installed and running.
-- Database will be Postgresql and running on port 5432 by default.
-- Redis will be on port 6379 by default.
+    If you already have a database system (e.g., MySQL), you can directly run migrations:  
 
-Install Database System using Docker/Podman and run migration:
-`npm run collab-cli setup-local-db`
+   ```sh
+   npm run collab-cli init-db -- --type mysql --name collab-db --user <YOUR_DB_USER> --password <YOUR_DB_PASSWORD> --port <YOUR_DB_PORT>
+   ```
 
-If you already have a Database System, for example MySQL, then you can run migration directly:
-`npm run collab-cli init-db -- --type mysql --name collab-db --user <YOUR_DB_USER> --password <YOUR_DB_PASSWORD> --port <YOUR_DB_PORT>`
+2. **Install Redis**  
+   Run the following command to set up Redis (default port: 6379):  
 
-Install Redis:
-`npm run collab-cli setup-redis`
+   ```sh
+   npm run collab-cli setup-redis
+   ```
 
-Get help and options:
+#### Additional Help
 
-``` sh
+For more options, run:  
+
+```sh
 npm run collab-cli help
 npm run collab-cli help setup-local-db 
 npm run collab-cli help init-db 
 npm run collab-cli help setup-redis 
 ```
 
-For example, if you want to specify a port and name for the database, run commands like the following:
+**Example**: To specify a custom port and database name:  
 
-``` sh
+```sh
 npm run collab-cli setup-local-db -- --port 5432 --name collab-db
 ```
 
-### Start the samples
+---
 
-1. Start the client sample: `samples/collabClientReactSample` (Based on React framework)
+### Start the Samples
 
-`npm run start:sample-React-client`
+1. **Start the Client Sample**  
+   - React-based client:  
 
-or Start the client Vue sample: `samples/collabClientVueSample`  (Based on Vue framework)
+     ```sh
+     npm run start:sample-React-client
+     ```
 
-`npm run start:sample-Vue-client`
+   - Vue3-based client:  
 
-2. Start the server sample: `samples/collabServerSample`
+     ```sh
+     npm run start:sample-Vue-client
+     ```
 
-`npm run start:sample-server`
+2. **Start the Server Sample**  
 
-you can setup env variables by creating a `.env` file in the project root directory to pass custom configuration.
+   ```sh
+   npm run start:sample-server
+   ```
 
-For example, the following are parameters for setting up a custom database connection.
+---
 
-``` sh
+## Environment Configuration
+
+You can customize configurations by creating a `.env` file in the project root. Example for database setup:  
+
+```sh
 DB_TYPE=mysql
 DB_HOST=localhost
 DB_PORT=3306
