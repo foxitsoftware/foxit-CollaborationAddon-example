@@ -5,7 +5,7 @@
   "license": "Commercial",
   "main": "packages/web-collab-client",
   "scripts": {
-    "start:sample-client": "npm start --workspace=samples/collabClientSample",
+    "start:sample-React-client": "npm start --workspace=samples/collabClientReactSample",
     "start:sample-Vue-client": "npm start --workspace=samples/collabClientVueSample",
     "start:sample-server": "npm run generate --workspace=packages/collab-db  && npm start --workspace=samples/collabServerSample",
     "collab-cli": "node ./packages/collab-db/scripts/collab-cli"

@@ -1,4 +1,5 @@
-## Project structures 
+## Project structures
+
 ```
 packages
   web-collab-client   -- collab client sdk
@@ -6,7 +7,7 @@ packages
   collab-db           -- collab db setup and migration
 docs                  -- documents 
 samples
-  collabClientSample/ -- collab client demo
+  collabClientReactSample/ -- collab client demo based on React Framework
   collabClientVueSample/ -- collab client demo based on Vue3 Framework
   collabServerSample/ -- collab server demo
 ```
@@ -22,23 +23,24 @@ node -v
 # v20.10.0
 ```
 
-### install Docker 
+### install Docker
 
 [Reference](https://www.docker.com/get-started/)
 
-## Getting started 
+## Getting started
 
-### install dependencies 
+### install dependencies
 
 cd into to project root and run command: `npm install`
 
 **Notice**:
-Npm workspace is used to manage dependencies between samples and packages. 
+Npm workspace is used to manage dependencies between samples and packages.
 If you want to use other package manager, like `yarn` or `pnpm`, please change the workspace settings.
 
 ### Setup Local Database and Redis for development
 
 **Notice**:
+
 - Make sure Docker or Podman is installed and running.
 - Database will be Postgresql and running on port 5432 by default.
 - Redis will be on port 6379 by default.
@@ -69,15 +71,13 @@ npm run collab-cli setup-local-db -- --port 5432 --name collab-db
 
 ### Start the samples
 
+1. Start the client sample: `samples/collabClientReactSample` (Based on React framework)
 
-1. Start the client sample: `samples/collabClientSample` (Based on React framework)
-
-`npm run start:sample-client`
+`npm run start:sample-React-client`
 
 or Start the client Vue sample: `samples/collabClientVueSample`  (Based on Vue framework)
 
 `npm run start:sample-Vue-client`
-
 
 2. Start the server sample: `samples/collabServerSample`
 

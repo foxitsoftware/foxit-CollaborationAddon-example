@@ -1,7 +1,7 @@
 ## Project Structure
 
 ```
-collabClientSample
+collabClientReactSample
 ├── public
       ├── assets (Default document and project related image resources)
       ├── index.html (Framework template)
